@@ -103,7 +103,7 @@ var cards = [
     cost: 0,
     instant: true,
     priority: 1,
-    desc: "Gain 4 ðŸŽ© Intellect",
+    desc: "Gain 4 🎩 Intellect",
     effect: function(user) {
       user.intellect += 4;
     }
@@ -148,7 +148,7 @@ var cards = [
     cost: 6,
     instant: false,
     priority: 4,
-    desc: "1-strength âš” Attack to target",
+    desc: "1-strength ⚔ Attack to target",
     effect: function(user, target) {
       target.attack(1, user);
     }
@@ -159,7 +159,7 @@ var cards = [
     cost: 9,
     instant: false,
     priority: 4,
-    desc: "2-strength âš” Attack to target",
+    desc: "2-strength ⚔ Attack to target",
     effect: function(user, target) {
       target.attack(2, user);
     }
@@ -170,7 +170,7 @@ var cards = [
     cost: 10,
     instant: false,
     priority: 4,
-    desc: "3-strength âš” Attack to target",
+    desc: "3-strength ⚔ Attack to target",
     effect: function(user, target) {
       target.attack(3, user);
     }
@@ -181,7 +181,7 @@ var cards = [
     cost: 1,
     instant: true,
     priority: 1,
-    desc: "Gain 1 ðŸŽ© Intellect for each card in your hand.",
+    desc: "Gain 1 🎩 Intellect for each card in your hand.",
     effect: function(user, target) {
       user.intellect += user.hand.length;
     }
@@ -216,10 +216,10 @@ var cards = [
     cost: 7,
     instant: false,
     priority: 4,
-    desc: "1-Strength âš” Attack. If success + victim is guest, lose all intellect.",
+    desc: "1-Strength ⚔ Attack. If success + victim is guest, lose all intellect.",
     effect: function(user, target) {
       if(target.attack(1, user) && target.role.faction === "guest") {
-        user.send("You killed an ally! Consumed by guilt, unable to focus, you will have no ðŸŽ© Intellect tomorrow.");
+        user.send("You killed an ally! Consumed by guilt, unable to focus, you will have no 🎩 Intellect tomorrow.");
         user.intellectModifier = -Infinity;
       }
     }
@@ -230,7 +230,7 @@ var cards = [
     cost: 3,
     instant: false,
     priority: 4,
-    desc: "3-strength âš” Attack to target. Discard your hand.",
+    desc: "3-strength ⚔ Attack to target. Discard your hand.",
     rare: true,
     effect: function(user, target) {
       target.attack(3, user);
@@ -271,7 +271,7 @@ var cards = [
     priority: 1,
     effect: function(user, target) {
       target.intellectModifier += user.intellect;
-      target.send("You have been supported! Received " + user.intellect + " ðŸŽ© Intellect for tomorrow.");
+      target.send("You have been supported! Received " + user.intellect + " 🎩 Intellect for tomorrow.");
       user.loseAllIntellect();
     }
   },
@@ -284,7 +284,7 @@ var cards = [
     priority: 1,
     effect: function(user, target) {
       target.intellectModifier -= user.intellect;
-      target.send("You have been betrayed! Lost " + user.intellect + " ðŸŽ© Intellect for tomorrow.");
+      target.send("You have been betrayed! Lost " + user.intellect + " 🎩 Intellect for tomorrow.");
       user.loseAllIntellect();
     }
   },
@@ -294,7 +294,7 @@ var cards = [
     cost: 5,
     instant: false,
     priority: 0,
-    desc: "Steal a random card from target. Target gains 3 ðŸŽ© Intellect",
+    desc: "Steal a random card from target. Target gains 3 🎩 Intellect",
     effect: function(user, target) {
       if(target.hand.length === 0) {
         user.send("Your target has no cards! They could not be bribed.");
@@ -305,7 +305,7 @@ var cards = [
       }
       user.placeInHand(target.hand.splice(Math.floor(Math.random() * target.hand.length), 1));
       user.send("Bribe successful! You stole a card!");
-      target.send("You've been bribed! A random card was stolen! However, you gain 3 ðŸŽ© Intellect");
+      target.send("You've been bribed! A random card was stolen! However, you gain 3 🎩 Intellect");
       
       target.intellectModifier += 3;
     }
@@ -335,7 +335,7 @@ var cards = [
       var yourResponse = "Secret Hand:"
       for(var i = 0; i < target.hand.length; i++) {
         var yourCard = cards[target.hand[i]];
-        yourResponse += "\n**" + (i + 1) + ")** #" + target.hand[i] + " - " + capitalize(yourCard.name) + " - " + yourCard.cost + " ðŸŽ© - " + yourCard.desc;
+        yourResponse += "\n**" + (i + 1) + ")** #" + target.hand[i] + " - " + capitalize(yourCard.name) + " - " + yourCard.cost + " 🎩 - " + yourCard.desc;
       }
       user.send(yourResponse);
     }
@@ -346,12 +346,12 @@ var cards = [
     cost: 9,
     instant: false,
     priority: 5,
-    desc: "Target has +2 ðŸ›¡ Defense tonight and draws 2 cards.",
+    desc: "Target has +2 🛡 Defense tonight and draws 2 cards.",
     rare: true,
     effect: function(user, target) {
       target.bonusDefense = 2;
       target.drawCards(2);
-      target.send("An angel's wings shield you... +2 Cards, +2 ðŸ›¡ Defense");
+      target.send("An angel's wings shield you... +2 Cards, +2 🛡 Defense");
     }
   },
   {//#24 - rest
@@ -373,10 +373,10 @@ var cards = [
     cost: 8,
     instant: false,
     priority: 4,
-    desc: "All target visitors attacked with a 1-strength âš” Attack. +1 Target ðŸ›¡ Defense.",
+    desc: "All target visitors attacked with a 1-strength ⚔ Attack. +1 Target 🛡 Defense.",
     effect: function(user, target) {
       target.bonusDefense++;
-      target.send("You have been guarded! An anonymous helper will attack all your visitors (1-strength). +1 ðŸ›¡ Defense.");
+      target.send("You have been guarded! An anonymous helper will attack all your visitors (1-strength). +1 🛡 Defense.");
       for(var i = 0; i < target.visitors.length; i++) {
         if(target.visitors[i] !== user) {
           target.visitors[i].attack(1, user);
@@ -390,10 +390,10 @@ var cards = [
     cost: 9,
     instant: false,
     priority: 4,
-    desc: "+1 Target ðŸ›¡ Defense. 2-strength âš” Attack to random target visitor.",
+    desc: "+1 Target 🛡 Defense. 2-strength ⚔ Attack to random target visitor.",
     effect: function(user, target) {
       target.bonusDefense += 2;
-      target.send("Valiance smiles upon you. +1 ðŸ›¡ Defense, a random visitor will be attacked (2-strength)");
+      target.send("Valiance smiles upon you. +1 🛡 Defense, a random visitor will be attacked (2-strength)");
       var vis = target.visitors.slice();
       for(var i = 0; i < vis.length; i++) {
         if(vis[i] === user) {
@@ -410,7 +410,7 @@ var cards = [
     targets: 0,
     cost: 4,
     instant: true,
-    desc: "+1 ðŸ›¡ Defense tonight",
+    desc: "+1 🛡 Defense tonight",
     effect: function(user, target) {
       user.bonusDefense++;
     }
@@ -447,10 +447,10 @@ var cards = [
     cost: 5,
     instant: false,
     priority: 1,
-    desc: "Target has 5 less ðŸŽ© Intellect tomorrow.",
+    desc: "Target has 5 less 🎩 Intellect tomorrow.",
     effect: function(user, target) {
       target.intellectModifier -= 5;
-      target.send("You, disturbed by the feeling of being watched, are unable to focus. -5 ðŸŽ© Intellect tonight.");
+      target.send("You, disturbed by the feeling of being watched, are unable to focus. -5 🎩 Intellect tonight.");
     }
   },
   {//#31 - oath
@@ -506,7 +506,7 @@ var cards = [
     targets: 0,
     cost: 0,
     instant: true,
-    desc: "+3 ðŸŽ© Intellect. -1 ðŸ›¡ Defense tonight.",
+    desc: "+3 🎩 Intellect. -1 ðŸ›¡ Defense tonight.",
     effect: function(user, target) {
       user.bonusDefense--;
       user.intellect += 3;
@@ -539,7 +539,7 @@ var cards = [
     targets: 0,
     cost: 5,
     instant: true,
-    desc: "+6 ðŸŽ© Intellect tomorrow.",
+    desc: "+6 🎩 Intellect tomorrow.",
     effect: function(user, target) {
       user.intellectModifier += 6;
     }
@@ -549,7 +549,7 @@ var cards = [
     targets: 0,
     cost: 0,
     instant: true,
-    desc: "Lose all ðŸŽ© Intellect, and gain that many tomorrow.",
+    desc: "Lose all 🎩 Intellect, and gain that many tomorrow.",
     effect: function(user, target) {
       user.intellectModifier += user.intellect;
       user.intellect = 0;
@@ -1699,11 +1699,11 @@ Game.prototype.update = function() {
   this.checkWin();
 };
 Game.prototype.tick = function() {
+  this.time++;
   if(this.time >= 135) {
     this.day++;
     this.time = 0;
   }
-  this.time++;
 };
 Game.prototype.announce = function(msg) {
   for(var i = 0; i < this.players.length; i++) {
@@ -1780,7 +1780,7 @@ Game.prototype.checkWin = function() {
       }
       
       if(gemsGiven > 0) {
-        this.players[i].send("For this game, you won **" + gemsGiven + "** ðŸ’Ž Gems!");
+        this.players[i].send("For this game, you won **" + gemsGiven + "** 💎 Gems!");
         this.players[i].account.gems += gemsGiven;
       }
     }
@@ -2248,10 +2248,10 @@ var commands = [
     ],
     effect: function(message, args) {
       var yourPlayer = Player.findFromUserID(message.author.id);
-      var yourResponse = yourPlayer.intellect + " ðŸŽ© - Hand:";
+      var yourResponse = yourPlayer.intellect + " 🎩 - Hand:";
       for(var i = 0; i < yourPlayer.hand.length; i++) {
         var yourCard = cards[yourPlayer.hand[i]];
-        yourResponse += "\n**" + (i + 1) + ")** #" + yourPlayer.hand[i] + " - " + capitalize(yourCard.name) + " - " + yourCard.cost + " ðŸŽ© - " + yourCard.desc;
+        yourResponse += "\n**" + (i + 1) + ")** #" + yourPlayer.hand[i] + " - " + capitalize(yourCard.name) + " - " + yourCard.cost + " 🎩 - " + yourCard.desc;
       }
       yourPlayer.send(yourResponse);
     }
@@ -2330,7 +2330,7 @@ var commands = [
         }
         var oldIntellect = yourPlayer.intellect;
         yourPlayer.intellect -= cards[yourPlayer.hand[parseInt(args[0]) - 1]].cost;
-        message.channel.send("Card played! Your ðŸŽ© Intellect went from **" + oldIntellect + "** to **" + yourPlayer.intellect + "**.");
+        message.channel.send("Card played! Your 🎩 Intellect went from **" + oldIntellect + "** to **" + yourPlayer.intellect + "**.");
         if(!cards[yourPlayer.hand[parseInt(args[0]) - 1]].destroy) {
           yourPlayer.placeInDeck(yourPlayer.hand.splice(parseInt(args[0]) - 1, 1)[0]);
         }
@@ -2457,7 +2457,7 @@ var commands = [
     conditions: [ { get: acc.has, message: "You don't have an account! Use the register command" } ],
     effect: function(message, args) {
       var yourAccount = Account.findFromUserID(message.author.id);
-      message.channel.send("**#" + yourAccount.ID + "** - " + yourAccount.gems + " ðŸ’Ž | " + yourAccount.wins + "W, " + yourAccount.losses + "L | " + yourAccount.getWinrate().toFixed(3) + " W/L");
+      message.channel.send("**#" + yourAccount.ID + "** - " + yourAccount.gems + " 💎 | " + yourAccount.wins + "W, " + yourAccount.losses + "L | " + yourAccount.getWinrate().toFixed(3) + " W/L");
     }
   },
   {//cardinfo
@@ -2480,7 +2480,7 @@ var commands = [
         yourIndex = parseInt(args[0]);
       }
       if(yourCard) {
-      message.channel.send("**#" + yourIndex + " " + capitalize(yourCard.name) + "** - " + yourCard.cost + " ðŸŽ© - " + (yourCard.instant ? "Instant" : "Visit") + (yourCard.rare ? " [RARE]" : "") + "\n" + yourCard.desc);
+      message.channel.send("**#" + yourIndex + " " + capitalize(yourCard.name) + "** - " + yourCard.cost + " 🎩 - " + (yourCard.instant ? "Instant" : "Visit") + (yourCard.rare ? " [RARE]" : "") + "\n" + yourCard.desc);
       }
       else {
         message.channel.send("Invalid card.");
